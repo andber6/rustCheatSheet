@@ -61,7 +61,6 @@ fn main() {
     // because if is an expression, we can use it on the right side of a let statement to assign the outcome to a variable
     let condition = true;
     let number_test = if condition { 5 } else { 6 };
-    println!("The value of number_test is: {number_test}");
 
     // loops:
     let mut counter = 0;
@@ -72,16 +71,15 @@ fn main() {
             break counter * 2;
         }
     };
-    println!("The result is {result}");
 
     // nested loops:
     let mut count = 0;
     // giving the loop a label
     'counting_up: loop {
-        println!("count = {count}");
+        // println!("count = {count}");
         let mut remaining = 10;
         loop {
-            println!("remaining = {remaining}");
+            // println!("remaining = {remaining}");
             if remaining == 9 {
                 break;
             }
@@ -93,7 +91,7 @@ fn main() {
         }
         count += 1;
     }
-    println!("End count = {count}");
+    // println!("End count = {count}");
 
     // looping through an array
     let a = [10, 20, 30, 40, 50];
@@ -115,6 +113,11 @@ fn main() {
         println!("{number}!");
     }
     println!("LIFTOFF!!!");
+
+    // converting degrees in fahrenheit to celsius
+    let parameter_degrees_f: f64 = 40.0;
+    let c = convert_to_celsius(parameter_degrees_f);
+    println!("{parameter_degrees_f} Fahrenheit is {c} degrees celsius");
 }
 
 // in function signatures you must declare the type of each parameter
@@ -129,4 +132,8 @@ fn five() -> i32 {
 }
 fn plus_one(x: i32) -> i32 {
     x + 1
+}
+
+fn convert_to_celsius(f: f64) -> f64 {
+    (f-32.0) * (5.0/9.0)
 }
