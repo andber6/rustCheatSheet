@@ -8,7 +8,6 @@ fn main() {
     // Tuple destructuring
     let tuple = (500, 6.4, 1);
     let (x, y, z) = tuple;
-    println!("The value of y is: {y}");
     
     // a tuple without any values is called a unit - written ()
 
@@ -30,13 +29,32 @@ fn main() {
     let x = x + 1;
     {
         let x = x * 2;
-        println!("The value of x in the inner scope is: {x}");
     }
-    println!("The value of x is: {x}");
 
-    another_function();
+    // expressions do not include ending semicolons
+    // by adding a semicolon at the end of an expression, you turn it into a statement and it will not return a value
+    // expressions - the expression here is { let x = 3; x + 1 }
+    let u = {
+        let x = 3;
+        x + 1
+    };
+
+    another_function(55, 'h');
+    let f = five();
+    let p1 = plus_one(f);
+    println!("p1 is: {p1}");
 }
 
-fn another_function() {
-    println!("Another function.");
+// in function signatures you must declare the type of each parameter
+fn another_function(value: i32, unit_label: char) {
+    println!("The meassurement is: {value}{unit_label}");
+}
+
+// we dont name return values, but we must declare their type after an arrow
+// you can return early by using the return keyword
+fn five() -> i32 {
+    5
+}
+fn plus_one(x: i32) -> i32 {
+    x + 1
 }
