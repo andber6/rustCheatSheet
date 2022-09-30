@@ -117,8 +117,46 @@ fn main() {
     // converting degrees in fahrenheit to celsius
     let parameter_degrees_f: f64 = 40.0;
     let c = convert_to_celsius(parameter_degrees_f);
-    println!("{parameter_degrees_f} Fahrenheit is {c} degrees celsius");
+    // println!("{parameter_degrees_f} Fahrenheit is {c} degrees celsius");
+
+
+    let mut s = String::from("hello");
+    s.push_str(", world!"); // push_str() appends a literal to a String
+    println!("{}", s); // This will print `hello, world!`
+
+    // memory and allocation
+    let s1 = String::from("hello");
+    let s2 = s1;
+    // To ensure memory safety - s1 is no longer accessible. s1 has been moved into s2
+    // because s1 was moved, the problem with double free error (one of the memory safety bugs) is solved
+    // println!("{}, world!", s1);
+    // if we did want to copy the heap data of the String, not just the stack data, we could use a common method called clone. -- let s2 = s1.clone();
+
 }
+// ownership and functions:
+fn test() {
+    let s = String::from("hello");  // s comes into scope
+
+    takes_ownership(s);             // s's value moves into the function...
+                                    // ... and so is no longer valid here
+
+    let x = 5;                      // x comes into scope
+
+    makes_copy(x);                  // x would move into the function,
+                                    // but i32 is Copy, so it's okay to still
+                                    // use x afterward
+
+} // Here, x goes out of scope, then s. But because s's value was moved, nothing
+  // special happens.
+
+fn takes_ownership(some_string: String) { // some_string comes into scope
+    println!("{}", some_string);
+} // Here, some_string goes out of scope and `drop` is called. The backing
+  // memory is freed.
+
+fn makes_copy(some_integer: i32) { // some_integer comes into scope
+    println!("{}", some_integer);
+} // Here, some_integer goes out of scope. Nothing special happens.
 
 // in function signatures you must declare the type of each parameter
 fn another_function(value: i32, unit_label: char) {
