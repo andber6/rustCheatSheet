@@ -253,3 +253,65 @@ fn second_word(s: &String) -> (usize, usize) {
 
     assert_eq!(slice, &[2, 3]);
 }
+
+
+// structs:
+struct User {
+    active: bool,
+    username: String,
+    email: String,
+    sign_in_count: u64,
+}
+
+// to use a struct after we've defined it, we create an instance of that struct by specifying concrete values for each of the fields
+let user1 = User {
+    email: String::from("someone@example.com"),
+    username: String::from("someusername123"),
+    active: true,
+    sign_in_count: 1,
+};
+// to access email for example - in this case use: user1.email. If the instance is mutable, we can change a value by using the dot notation and assigning it to a particular field
+user1.email = String::from("anotheremail@example.com");
+// either an entire struct is mutable or none of it is. Certain fields can not be mutable if others aren't. 
+fn build_user(email: String, username: String) -> User {
+    User {
+        email: email,
+        username: username,
+        active: true,
+        sign_in_count: 1,
+    }
+}
+// using the field init shorthand
+fn build_user(email: String, username: String) -> User {
+    User {
+        email, // this is the same as email: email,
+        username, // this is the same as username: username,
+        active: true,
+        sign_in_count: 1,
+    }
+}
+// creating instances from other instances with struct update syntax
+// .. this is the same as ..
+let user2 = User {
+    active: user1.active,
+    username: user1.username,
+    email: String::from("another@example.com"),
+    sign_in_count: user1.sign_in_count,
+};
+// .. same as this:
+let user2 = User {
+    email: String::from("another@example.com"),
+    // the ..user1 must come last to specify that any remaining fields should get their values from the corresponding fields in user1
+    ..user1
+};
+
+// tuple structs:
+struct Color(i32, i32, i32);
+struct Point(i32, i32, i32);
+
+let black = Color(0, 0, 0);
+let origin = Point(0, 0, 0);
+// structs without fields - unit-like structs:
+struct AlwaysEqual;
+
+let subject = AlwaysEqual;
