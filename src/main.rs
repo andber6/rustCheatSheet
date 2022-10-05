@@ -315,3 +315,36 @@ let origin = Point(0, 0, 0);
 struct AlwaysEqual;
 
 let subject = AlwaysEqual;
+
+// debugging:
+#[derive(Debug)]
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+fn debug_test() {
+    let rect1 = Rectangle {
+        width: 30,
+        height: 50,
+    };
+
+    // :? syntax is for allowing us to pretty-print
+    println!("rect1 is {:#?}", rect1);
+    // can also use dbg! macro instead of println! macro when debugging. It takes ownership of an expression (as opposed to println! that takes a referance)
+}
+#[derive(Debug)]
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+fn debug_test_2() {
+    let scale = 2;
+    let rect1 = Rectangle {
+        width: dbg!(30 * scale),
+        height: 50,
+    };
+
+    dbg!(&rect1);
+}
