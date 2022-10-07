@@ -486,3 +486,31 @@ match dice_roll {
 fn add_fancy_hat() {}
 fn remove_fancy_hat() {}
 fn reroll() {}
+
+
+// concise control flow with if let:
+let config_max = Some(3u8);
+// This is the same code as ...
+match config_max {
+    Some(max) => println!("The maximum is configured to be {}", max),
+    _ => (),
+}
+// this:
+// the if let takes a pattern and an expression separated by an equal sign. 
+// It works the same way as a match, where the expression is given to the match and the pattern is its first arm. The pattern here is Some(max)
+if let Some(max) = config_max {
+    // you can think of "if let" as syntax sugar for a "match" that runs code when the value matches one pattern and then ignores all other values
+    println!("The maximum is configured to be {}", max);
+}
+
+let mut count = 0;
+match coin {
+    Coin::Quarter(state) => println!("State quarter from {:?}!", state),
+    _ => count += 1,
+} 
+// or like this...:
+if let Coin::Quarter(state) = coin {
+    println!("State quarter from {:?}!", state);
+} else {
+    count += 1;
+}
