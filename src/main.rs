@@ -395,3 +395,44 @@ fn some_function2() {
         println!("The rectangle has a nonzero width; it is {}", rect1.width);
     }
 }
+
+
+// Enums:
+enum IpAddrKind {
+    V4,
+    V6,
+}
+// IpAddreKind is now a custom data type that we can use elsewhere in our code
+let four = IpAddrKind::V4;
+let six = IpAddrKind::V6;
+
+fn route(ip_kind: IpAddrKind) {}
+route(IpAddrKind::V4);
+route(IpAddrKind::V6);
+
+enum IpAddr {
+    V4(u8, u8, u8, u8),
+    V6(String),
+}
+
+let home = IpAddr::V4(127, 0, 0, 1);
+let loopback = IpAddr::V6(String::from("::1"));
+
+enum Message {
+    Quit,
+    Move { x: i32, y: i32 },
+    Write(String),
+    ChangeColor(i32, i32, i32),
+}
+
+// Rust does not have Null values, but it does have an enum that can encode the concept of a value being present or absent:
+// <T> syntax is a generic type parameter
+enum Option<T> {
+    None,
+    Some(T),
+}
+
+let some_number = Some(5);
+let some_char = Some('e');
+
+let absent_number: Option<i32> = None;
