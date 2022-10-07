@@ -348,3 +348,50 @@ fn debug_test_2() {
 
     dbg!(&rect1);
 }
+
+
+// defining methods:
+#[derive(Debug)]
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+// defining an area method on the Rectangle struct
+// Everything within this impl block will be associated with the Rectangle type
+impl Rectangle {
+    // &self is short for "self: &Self"
+    fn area(&self) -> u32 {
+        self.width * self.height
+    }
+}
+
+fn some_function() {
+    let rect1 = Rectangle {
+        width: 30,
+        height: 50,
+    };
+
+    println!(
+        "The area of the rectangle is {} square pixels.",
+        rect1.area()
+    );
+}
+
+impl Rectangle {
+    fn width(&self) -> bool {
+        self.width > 0
+    }
+}
+
+fn some_function2() {
+    let rect1 = Rectangle {
+        width: 30,
+        height: 50,
+    };
+
+    if rect1.width() {
+        // When we follow rect1.width with parentheses, Rust knows we mean the method width
+        println!("The rectangle has a nonzero width; it is {}", rect1.width);
+    }
+}
